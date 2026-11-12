@@ -5,6 +5,8 @@ public class GridRenderer : MonoBehaviour
     [SerializeField] private GridManager gridManager;
     [SerializeField] private GridCellView cellPrefab;
 
+    [SerializeField] private NetworkConnectivity connectivity;
+
     private GridCellView[,] cellViews;
 
     private void Start()
@@ -41,6 +43,11 @@ public class GridRenderer : MonoBehaviour
                     gridManager.GetCell(position),
                     gridManager
                 );
+
+                view.UpdateBuildingStatus(
+                gridManager.GetCell(position),
+                connectivity
+                );
             }
         }
     }
@@ -68,5 +75,28 @@ public class GridRenderer : MonoBehaviour
             gridManager
         );
     }
+
+
+    public void RefreshAllBuildings()
+    {
+        for (int x = 0; x < gridManager.Width; x++)
+        {
+            for (int y = 0; y < gridManager.Height; y++)
+            {
+                Vector2Int position = new Vector2Int(x, y);
+
+                GridCell cell = gridManager.GetCell(position);
+
+                if (cell.Structure != StructureType.Building)
+                    continue;
+
+                cellViews[x, y].UpdateBuildingStatus(
+                    cell,
+                    connectivity
+                );
+            }
+        }
+    }
+
 
 }

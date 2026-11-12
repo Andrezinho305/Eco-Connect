@@ -31,6 +31,8 @@ public class GridManager : MonoBehaviour
                 );
             }
         }
+
+        CreateTestLevel();
     }
 
 
@@ -156,6 +158,38 @@ public class GridManager : MonoBehaviour
             (position.y + 0.5f) * cellSize,
             0f
         );
+    }
+
+
+
+
+    private void CreateTestLevel()
+    {
+        GetCell(new Vector2Int(1, 1))
+            .SetStructure(StructureType.WaterSource);
+
+        GetCell(new Vector2Int(8, 1))
+            .SetStructure(StructureType.PowerSource);
+
+        GetCell(new Vector2Int(8, 8))
+            .SetStructure(StructureType.SewageTreatment);
+
+        GetCell(new Vector2Int(3, 5))
+            .SetStructure(StructureType.Building);
+
+        GetCell(new Vector2Int(6, 5))
+            .SetStructure(StructureType.Building);
+       
+        GetCell(new Vector2Int(3, 5)).SetRequiredServices(NetworkType.Water | NetworkType.Electricity
+);
+
+        GetCell(new Vector2Int(6, 5)).SetRequiredServices( NetworkType.Water | NetworkType.Electricity | NetworkType.Sewage);
+
+        GetCell(new Vector2Int(4, 3))
+            .SetStructure(StructureType.Obstacle);
+
+        GetCell(new Vector2Int(5, 3))
+            .SetStructure(StructureType.Obstacle);
     }
 
 
