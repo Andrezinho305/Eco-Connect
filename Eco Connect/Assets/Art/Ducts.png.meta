@@ -1,0 +1,676 @@
+fileFormatVersion: 2
+guid: 31fbfa16c29a3ef47a1812976f1b47b8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4705708724909243129
+    second: Ducts_0
+  - first:
+      213: 7658176590180183666
+    second: Ducts_1
+  - first:
+      213: 1896158344158685381
+    second: Ducts_2
+  - first:
+      213: 4478076615754079609
+    second: Ducts_3
+  - first:
+      213: 6558115912149142894
+    second: Ducts_4
+  - first:
+      213: -4608396814237764129
+    second: Ducts_5
+  - first:
+      213: -5782107476246882772
+    second: Ducts_6
+  - first:
+      213: 2528562327703843177
+    second: Ducts_7
+  - first:
+      213: -4904636873795581733
+    second: Ducts_8
+  - first:
+      213: 2901884677679774414
+    second: Ducts_9
+  - first:
+      213: -578964546171579277
+    second: Ducts_10
+  - first:
+      213: -9168941937844165072
+    second: Ducts_11
+  - first:
+      213: 4838831235020492411
+    second: Ducts_12
+  - first:
+      213: 8218190712398066552
+    second: Ducts_13
+  - first:
+      213: 344120098540951648
+    second: Ducts_14
+  - first:
+      213: -818092987714229614
+    second: Ducts_15
+  - first:
+      213: 5524709017060567198
+    second: Ducts_16
+  - first:
+      213: -283142732422780410
+    second: Ducts_17
+  - first:
+      213: 7037957828630748155
+    second: Ducts_18
+  - first:
+      213: -8908629144259883478
+    second: Ducts_19
+  - first:
+      213: 6557590434819156565
+    second: Ducts_20
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Ducts_0
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 172
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 705045bb8d6f1beb0800000000000000
+      internalID: -4705708724909243129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_1
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 172
+        width: 30
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27ee6e4b80f474a60800000000000000
+      internalID: 7658176590180183666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_2
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 177
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c8a87db7f1805a10800000000000000
+      internalID: 1896158344158685381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_3
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 155
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97d5107c4f2552e30800000000000000
+      internalID: 4478076615754079609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_4
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 159
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6d8c7bfcab130b50800000000000000
+      internalID: 6558115912149142894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_5
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 138
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd5f057838fab00c0800000000000000
+      internalID: -4608396814237764129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_6
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 113
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c269c21a2e3d1cfa0800000000000000
+      internalID: -5782107476246882772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_7
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 127
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 961f8374a02471320800000000000000
+      internalID: 2528562327703843177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_8
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 108
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd8c129cfba3febb0800000000000000
+      internalID: -4904636873795581733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_9
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 108
+        width: 30
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eca70405db0954820800000000000000
+      internalID: 2901884677679774414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_10
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 95
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 374d5ef00da17f7f0800000000000000
+      internalID: -578964546171579277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_11
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 91
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 036ed9cf2ef51c080800000000000000
+      internalID: -9168941937844165072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_12
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 74
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7e067bfe5bf62340800000000000000
+      internalID: 4838831235020492411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_13
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 48
+        width: 6
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 873b6ec39e0ec0270800000000000000
+      internalID: 8218190712398066552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_14
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 63
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0681b99086f86c400800000000000000
+      internalID: 344120098540951648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_15
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 45
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29a2e0a13cc85a4f0800000000000000
+      internalID: -818092987714229614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_16
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 45
+        width: 32
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e98ea417495bbac40800000000000000
+      internalID: 5524709017060567198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_17
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 31
+        width: 6
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60ae43d5f23121cf0800000000000000
+      internalID: -283142732422780410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_18
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 26
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfb17bf3b59dba160800000000000000
+      internalID: 7037957828630748155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_19
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 12
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2e82b44ef03e5480800000000000000
+      internalID: -8908629144259883478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ducts_20
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 0
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55a25e1c1cd310b50800000000000000
+      internalID: 6557590434819156565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Ducts_0: -4705708724909243129
+      Ducts_1: 7658176590180183666
+      Ducts_10: -578964546171579277
+      Ducts_11: -9168941937844165072
+      Ducts_12: 4838831235020492411
+      Ducts_13: 8218190712398066552
+      Ducts_14: 344120098540951648
+      Ducts_15: -818092987714229614
+      Ducts_16: 5524709017060567198
+      Ducts_17: -283142732422780410
+      Ducts_18: 7037957828630748155
+      Ducts_19: -8908629144259883478
+      Ducts_2: 1896158344158685381
+      Ducts_20: 6557590434819156565
+      Ducts_3: 4478076615754079609
+      Ducts_4: 6558115912149142894
+      Ducts_5: -4608396814237764129
+      Ducts_6: -5782107476246882772
+      Ducts_7: 2528562327703843177
+      Ducts_8: -4904636873795581733
+      Ducts_9: 2901884677679774414
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
