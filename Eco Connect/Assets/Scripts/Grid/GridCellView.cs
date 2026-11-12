@@ -84,7 +84,7 @@ public class GridCellView : MonoBehaviour
                 break;
 
             case StructureType.SewageTreatment:
-                structureRenderer.color = Color.magenta;
+                structureRenderer.color = Color.green;
                 break;
 
             case StructureType.Building:

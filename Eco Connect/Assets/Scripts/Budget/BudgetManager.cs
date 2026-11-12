@@ -16,6 +16,7 @@ public class BudgetManager : MonoBehaviour
     [Min(0)] [SerializeField] private int secondNetworkExtraCost = 75;
     [Min(0)] [SerializeField] private int thirdNetworkExtraCost = 100;
 
+    public int InitialBudget => initialBudget;
 
     public int CurrentBudget { get; private set; }
 
@@ -28,7 +29,7 @@ public class BudgetManager : MonoBehaviour
 
     public bool TrySpend(int amount)
     {
-        if (amount < 0 || CurrentBudget < amount)
+        if (amount <= 0 || CurrentBudget < amount)
             return false;
 
         CurrentBudget -= amount;

@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 public class NetworkBuilder : MonoBehaviour
 {
+    [SerializeField] private LevelManager levelManager;
+
     [SerializeField] private GridManager gridManager;
     [SerializeField] private GridRenderer gridRenderer;
 
@@ -13,6 +16,12 @@ public class NetworkBuilder : MonoBehaviour
     private bool eraseMode = false;
 
     private bool pointerStartedOverUI;
+
+    public NetworkType SelectedNetwork => selectedNetwork;
+
+    public bool IsEraseMode => eraseMode;
+
+    public event Action OnToolChanged;
 
 
     private void Update()
@@ -43,6 +52,9 @@ public class NetworkBuilder : MonoBehaviour
 
     private void HandleConstruction()
     {
+        if (levelManager.IsLevelCompleted)
+            return;
+
         // Verifica se o clique começou sobre a interface
         if (Input.GetMouseButtonDown(0))
         {
@@ -132,7 +144,10 @@ public class NetworkBuilder : MonoBehaviour
         // Atualiza os elementos visuais
         gridRenderer.RefreshCell(gridPosition);
         gridRenderer.RefreshAllBuildings();
+
+        levelManager.CheckLevelCompletion();
     }
+
 
 
 
@@ -140,24 +155,33 @@ public class NetworkBuilder : MonoBehaviour
     {
         selectedNetwork = NetworkType.Water;
         eraseMode = false;
+
+        OnToolChanged?.Invoke();
     }
 
     public void SelectElectricity()
     {
         selectedNetwork = NetworkType.Electricity;
         eraseMode = false;
+
+        OnToolChanged?.Invoke();
     }
 
     public void SelectSewage()
     {
         selectedNetwork = NetworkType.Sewage;
         eraseMode = false;
+
+        OnToolChanged?.Invoke();
     }
 
     public void SelectEraser()
     {
         eraseMode = true;
+
+        OnToolChanged?.Invoke();
     }
+
 
 
 }
