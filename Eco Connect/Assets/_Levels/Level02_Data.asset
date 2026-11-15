@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce33581f5af965e4fad1867e5a61803e, type: 3}
   m_Name: Level02_Data
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
-  levelName: "Novo N\xEDvel"
+  levelName: Level 2
   width: 10
   height: 10
   initialBudget: 6000

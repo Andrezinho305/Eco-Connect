@@ -64,4 +64,30 @@ public class GridCell
     }
 
 
+    public bool AcceptsNetworkConnection(NetworkType network)
+    {
+        // Conecta com outras redes do mesmo tipo
+        if (HasNetwork(network))
+            return true;
+
+        // Conecta com casas que precisam desse serviço
+        if (Structure == StructureType.Building)
+        {
+            return (RequiredServices & network) == network;
+        }
+
+        // Conecta com as fontes correspondentes
+        if (Structure == StructureType.WaterSource)
+            return network == NetworkType.Water;
+
+        if (Structure == StructureType.PowerSource)
+            return network == NetworkType.Electricity;
+
+        if (Structure == StructureType.SewageTreatment)
+            return network == NetworkType.Sewage;
+
+        return false;
+    }
+
+
 }

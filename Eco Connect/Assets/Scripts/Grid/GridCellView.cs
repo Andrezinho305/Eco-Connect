@@ -35,6 +35,7 @@ public class GridCellView : MonoBehaviour
     }
 
 
+
     private void UpdateNetworkConnections(
         GridCell cell,
         GridManager grid,
@@ -43,24 +44,48 @@ public class GridCellView : MonoBehaviour
     {
         Vector2Int position = cell.Position;
 
+        // Verifica se existe uma rede construída nesta célula
         bool hasNetwork = cell.HasNetwork(network);
 
-        bool up = grid.AreConnected(
-            position, Vector2Int.up, network);
+        // Verifica se os vizinhos aceitam conexão
+        GridCell upCell = grid.GetCell(
+            position + Vector2Int.up
+        );
 
-        bool down = grid.AreConnected(
-            position, Vector2Int.down, network);
+        GridCell downCell = grid.GetCell(
+            position + Vector2Int.down
+        );
 
-        bool left = grid.AreConnected(
-            position, Vector2Int.left, network);
+        GridCell leftCell = grid.GetCell(
+            position + Vector2Int.left
+        );
 
-        bool right = grid.AreConnected(
-            position, Vector2Int.right, network);
+        GridCell rightCell = grid.GetCell(
+            position + Vector2Int.right
+        );
 
+        bool up = upCell != null &&
+                  upCell.AcceptsNetworkConnection(network);
+
+        bool down = downCell != null &&
+                    downCell.AcceptsNetworkConnection(network);
+
+        bool left = leftCell != null &&
+                    leftCell.AcceptsNetworkConnection(network);
+
+        bool right = rightCell != null &&
+                     rightCell.AcceptsNetworkConnection(network);
+
+        // Atualiza os segmentos visuais
         connectionView.SetConnections(
-            hasNetwork, up, down, left, right
+            hasNetwork,
+            up,
+            down,
+            left,
+            right
         );
     }
+
 
 
     private void UpdateStructureVisual(GridCell cell)
