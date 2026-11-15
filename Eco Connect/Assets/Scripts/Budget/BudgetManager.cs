@@ -16,6 +16,8 @@ public class BudgetManager : MonoBehaviour
     [Min(0)] [SerializeField] private int secondNetworkExtraCost = 75;
     [Min(0)] [SerializeField] private int thirdNetworkExtraCost = 100;
 
+    [SerializeField] private LevelData levelData;
+
     public int InitialBudget => initialBudget;
 
     public int CurrentBudget { get; private set; }
@@ -24,6 +26,11 @@ public class BudgetManager : MonoBehaviour
 
     private void Awake()
     {
+        if (levelData != null)
+        {
+            initialBudget = levelData.initialBudget;
+        }
+
         CurrentBudget = initialBudget;
     }
 

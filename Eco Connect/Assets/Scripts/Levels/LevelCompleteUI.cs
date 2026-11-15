@@ -86,6 +86,17 @@ public class LevelCompleteUI : MonoBehaviour
         }
     }
 
+
+    public void RetryLevel()
+    {
+        // Obtém a cena do nível atual
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        // Recarrega a mesma cena
+        SceneManager.LoadScene(currentScene.buildIndex);
+    }
+
+
     public void ReturnToMainMenu()
     {
         SceneManager.LoadScene(mainMenuSceneName);

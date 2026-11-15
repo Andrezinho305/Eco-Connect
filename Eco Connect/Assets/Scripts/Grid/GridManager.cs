@@ -9,6 +9,11 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] private GridRenderer gridRenderer;
 
+    [Header("Configuração do nível")]
+    [SerializeField] private LevelData levelData;
+
+    public LevelData CurrentLevel => levelData;
+
     public int Width => width;
     public int Height => height;
 
@@ -18,8 +23,21 @@ public class GridManager : MonoBehaviour
 
 
 
+
     private void Awake()
     {
+        if (levelData == null)
+        {
+            Debug.LogError(
+                "Nenhum LevelData foi atribuído ao GridManager!"
+            );
+            enabled = false;
+            return;
+        }
+
+        width = levelData.width;
+        height = levelData.height;
+
         cells = new GridCell[width, height];
 
         for (int x = 0; x < width; x++)
@@ -32,8 +50,9 @@ public class GridManager : MonoBehaviour
             }
         }
 
-        CreateTestLevel();
+        LoadLevelStructures();
     }
+
 
 
     private void OnDrawGizmos()
@@ -163,7 +182,7 @@ public class GridManager : MonoBehaviour
 
 
 
-    private void CreateTestLevel()
+    /*private void CreateTestLevel()
     {
         GetCell(new Vector2Int(1, 1))
             .SetStructure(StructureType.WaterSource);
@@ -190,7 +209,36 @@ public class GridManager : MonoBehaviour
 
         GetCell(new Vector2Int(5, 3))
             .SetStructure(StructureType.Obstacle);
+    }*/
+
+
+    private void LoadLevelStructures()
+    {
+        foreach (StructureData structure in levelData.structures)
+        {
+            GridCell cell = GetCell(structure.position);
+
+            if (cell == null)
+            {
+                Debug.LogWarning(
+                    "Estrutura fora do tabuleiro: " +
+                    structure.position
+                );
+
+                continue;
+            }
+
+            cell.SetStructure(structure.structureType);
+
+            if (structure.structureType == StructureType.Building)
+            {
+                cell.SetRequiredServices(
+                    structure.requiredServices
+                );
+            }
+        }
     }
+
 
 
 }

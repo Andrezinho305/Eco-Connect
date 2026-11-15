@@ -11,6 +11,8 @@ public class NetworkBuilder : MonoBehaviour
 
     [SerializeField] private BudgetManager budgetManager;
 
+    [SerializeField] private PauseManager pauseManager;
+
     private NetworkType selectedNetwork = NetworkType.Water;
 
     private bool eraseMode = false;
@@ -26,6 +28,9 @@ public class NetworkBuilder : MonoBehaviour
 
     private void Update()
     {
+        if (pauseManager != null && pauseManager.IsPaused)
+            return;
+
         HandleToolSelection();
         HandleConstruction();
     }

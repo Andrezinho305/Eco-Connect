@@ -7,6 +7,19 @@ public class MainMenuUI : MonoBehaviour
 
     public void PlayGame()
     {
+        Time.timeScale = 1f;
+
         SceneManager.LoadScene(firstLevelSceneName);
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("Encerrando o jogo...");
+
+        Application.Quit();
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 }
