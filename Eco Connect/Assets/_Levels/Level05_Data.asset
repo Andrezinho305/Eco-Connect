@@ -12,8 +12,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce33581f5af965e4fad1867e5a61803e, type: 3}
   m_Name: Level05_Data
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
-  levelName: "Novo N\xEDvel"
+  levelName: Level 5
   width: 10
   height: 10
-  initialBudget: 5000
-  structures: []
+  initialBudget: 13000
+  structures:
+  - position: {x: 5, y: 0}
+    structureType: 5
+    requiredServices: 0
+    visualVariant: 1
+  - position: {x: 5, y: 1}
+    structureType: 5
+    requiredServices: 0
+    visualVariant: 1
+  - position: {x: 5, y: 2}
+    structureType: 5
+    requiredServices: 0
+    visualVariant: 1
+  - position: {x: 5, y: 3}
+    structureType: 5
+    requiredServices: 0
+    visualVariant: 1
+  - position: {x: 5, y: 5}
+    structureType: 5
+    requiredServices: 0
+    visualVariant: 1
+  - position: {x: 5, y: 7}
+    structureType: 5
+    requiredServices: 0
+    visualVariant: 1
+  - position: {x: 5, y: 8}
+    structureType: 5
+    requiredServices: 0
+    visualVariant: 1
+  - position: {x: 5, y: 9}
+    structureType: 2
+    requiredServices: 0
+    visualVariant: 0
+  - position: {x: 5, y: 6}
+    structureType: 1
+    requiredServices: 0
+    visualVariant: 0
+  - position: {x: 5, y: 4}
+    structureType: 3
+    requiredServices: 0
+    visualVariant: 0
+  - position: {x: 3, y: 0}
+    structureType: 4
+    requiredServices: 3
+    visualVariant: 1
+  - position: {x: 1, y: 7}
+    structureType: 4
+    requiredServices: -1
+    visualVariant: 1
+  - position: {x: 9, y: 3}
+    structureType: 4
+    requiredServices: 2
+    visualVariant: 1
+  - position: {x: 7, y: 2}
+    structureType: 4
+    requiredServices: 3
+    visualVariant: 1
+  - position: {x: 8, y: 3}
+    structureType: 5
+    requiredServices: 0
+    visualVariant: 1
+  - position: {x: 2, y: 4}
+    structureType: 4
+    requiredServices: 1
+    visualVariant: 1
+  - position: {x: 9, y: 9}
+    structureType: 4
+    requiredServices: 4
+    visualVariant: 1

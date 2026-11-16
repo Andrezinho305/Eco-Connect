@@ -6099,7 +6099,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelScoreCalculator
   budgetManager: {fileID: 165367607}
   twoStarThreshold: 0.15
-  threeStarThreshold: 0.35
+  threeStarThreshold: 0.3
 --- !u!4 &1800070789
 Transform:
   m_ObjectHideFlags: 0

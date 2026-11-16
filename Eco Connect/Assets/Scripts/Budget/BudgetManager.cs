@@ -20,6 +20,11 @@ public class BudgetManager : MonoBehaviour
 
     public int InitialBudget => initialBudget;
 
+    public int ConfiguredInitialBudget =>
+    levelData != null
+        ? levelData.initialBudget
+        : initialBudget;
+
     public int CurrentBudget { get; private set; }
 
     public event Action<int> OnBudgetChanged;
