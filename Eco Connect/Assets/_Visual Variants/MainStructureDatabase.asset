@@ -19,11 +19,14 @@ MonoBehaviour:
     - {fileID: -9194042883246490967, guid: 476db1050b036344983a52cd3d47d4ec, type: 3}
     - {fileID: -1342120810765041982, guid: 438b24ce9ec3cd9478e9163ecb8e145c, type: 3}
   - structureType: 1
-    sprites: []
+    sprites:
+    - {fileID: -7954281104187522588, guid: 91833533da3e1534ba6182f31f73bd62, type: 3}
   - structureType: 2
-    sprites: []
+    sprites:
+    - {fileID: -9120604704950979184, guid: b7a94b5b95d36ce4dac2e8af80b7cd20, type: 3}
   - structureType: 3
-    sprites: []
+    sprites:
+    - {fileID: -9201410502561830570, guid: a05c6c8fe95254e4fa9c3c88be28fdb8, type: 3}
   - structureType: 5
     sprites:
     - {fileID: -9169979610214807350, guid: 876f2bd0ae4e30340902ef68e4cb0da2, type: 3}

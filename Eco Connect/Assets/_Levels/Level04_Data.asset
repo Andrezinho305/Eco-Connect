@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce33581f5af965e4fad1867e5a61803e, type: 3}
+  m_Name: Level04_Data
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  levelName: "Novo N\xEDvel"
+  width: 10
+  height: 10
+  initialBudget: 10000
+  structures:
+  - position: {x: 2, y: 2}
+    structureType: 4
+    requiredServices: 3
+    visualVariant: 2
+  - position: {x: 6, y: 2}
+    structureType: 3
+    requiredServices: 0
+    visualVariant: 0
+  - position: {x: 9, y: 2}
+    structureType: 4
+    requiredServices: 1
+    visualVariant: 0
+  - position: {x: 9, y: 9}
+    structureType: 4
+    requiredServices: 4
+    visualVariant: 2
+  - position: {x: 2, y: 9}
+    structureType: 4
+    requiredServices: 6
+    visualVariant: 2
+  - position: {x: 5, y: 9}
+    structureType: 1
+    requiredServices: 0
+    visualVariant: 0
+  - position: {x: 5, y: 5}
+    structureType: 4
+    requiredServices: 5
+    visualVariant: 2
+  - position: {x: 6, y: 5}
+    structureType: 2
+    requiredServices: 0
+    visualVariant: 0
