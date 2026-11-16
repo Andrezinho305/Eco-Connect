@@ -15,7 +15,9 @@ public class GridCellView : MonoBehaviour
     [SerializeField] private SpriteRenderer structureRenderer;
     [SerializeField] private BuildingStatusView buildingStatusView;
 
-
+    [Header("Artes das estruturas")]
+    [SerializeField]
+    private StructureVisualDatabase visualDatabase;
 
     public void UpdateVisual(GridCell cell, GridManager grid)
     {
@@ -88,6 +90,7 @@ public class GridCellView : MonoBehaviour
 
 
 
+
     private void UpdateStructureVisual(GridCell cell)
     {
         if (cell.Structure == StructureType.None)
@@ -96,31 +99,32 @@ public class GridCellView : MonoBehaviour
             return;
         }
 
-        structureRenderer.enabled = true;
-
-        switch (cell.Structure)
+        if (visualDatabase == null)
         {
-            case StructureType.WaterSource:
-                structureRenderer.color = Color.blue;
-                break;
+            Debug.LogWarning(
+                "StructureVisualDatabase não configurado!"
+            );
 
-            case StructureType.PowerSource:
-                structureRenderer.color = Color.yellow;
-                break;
-
-            case StructureType.SewageTreatment:
-                structureRenderer.color = Color.green;
-                break;
-
-            case StructureType.Building:
-                structureRenderer.color = Color.white;
-                break;
-
-            case StructureType.Obstacle:
-                structureRenderer.color = Color.black;
-                break;
+            structureRenderer.enabled = false;
+            return;
         }
+
+        Sprite sprite = visualDatabase.GetSprite(
+            cell.Structure,
+            cell.VisualVariant
+        );
+
+        if (sprite == null)
+        {
+            structureRenderer.enabled = false;
+            return;
+        }
+
+        structureRenderer.enabled = true;
+        structureRenderer.sprite = sprite;
+        structureRenderer.color = Color.white;
     }
+
 
 
     public void UpdateBuildingStatus(

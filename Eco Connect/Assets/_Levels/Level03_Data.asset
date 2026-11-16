@@ -20,33 +20,44 @@ MonoBehaviour:
   - position: {x: 5, y: 8}
     structureType: 4
     requiredServices: -1
+    visualVariant: 2
   - position: {x: 7, y: 8}
     structureType: 4
     requiredServices: 5
+    visualVariant: 2
   - position: {x: 3, y: 5}
     structureType: 4
     requiredServices: -1
+    visualVariant: 2
   - position: {x: 5, y: 5}
     structureType: 4
     requiredServices: -1
+    visualVariant: 2
   - position: {x: 7, y: 5}
     structureType: 4
     requiredServices: 1
+    visualVariant: 2
   - position: {x: 5, y: 4}
     structureType: 5
     requiredServices: 0
+    visualVariant: 0
   - position: {x: 5, y: 3}
     structureType: 5
     requiredServices: 0
+    visualVariant: 0
   - position: {x: 5, y: 2}
     structureType: 1
     requiredServices: 0
+    visualVariant: 0
   - position: {x: 4, y: 2}
     structureType: 2
     requiredServices: 0
+    visualVariant: 0
   - position: {x: 6, y: 2}
     structureType: 3
     requiredServices: 0
+    visualVariant: 0
   - position: {x: 4, y: 8}
     structureType: 5
     requiredServices: 0
+    visualVariant: 0

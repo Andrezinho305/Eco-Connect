@@ -170,7 +170,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 10
   m_MaskInteraction: 0
   m_Sprite: {fileID: -3497490083377588883, guid: 458ab46b5092eed4da04e6a96a14e543, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -296,6 +296,7 @@ MonoBehaviour:
   sewageConnections: {fileID: 7718770977986568554}
   structureRenderer: {fileID: 7703781910643140697}
   buildingStatusView: {fileID: 5731459680190114337}
+  visualDatabase: {fileID: 11400000, guid: 7eed7180f79fcfc4ebc36f9e711e8b3c, type: 2}
 --- !u!1 &5653769200834524827
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,7 +428,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 10
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7500482938498694921, guid: 458ab46b5092eed4da04e6a96a14e543, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -518,7 +519,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 10
   m_MaskInteraction: 0
   m_Sprite: {fileID: 449118660652190612, guid: 458ab46b5092eed4da04e6a96a14e543, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}

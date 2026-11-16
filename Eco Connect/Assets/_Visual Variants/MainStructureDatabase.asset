@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bfa5a46debc85a4ba0a9e49870ab2f8, type: 3}
+  m_Name: MainStructureDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::StructureVisualDatabase
+  entries:
+  - structureType: 4
+    sprites:
+    - {fileID: -1923994175756728024, guid: c33cd395a80ce0b46af8702342d4f4fd, type: 3}
+    - {fileID: -9194042883246490967, guid: 476db1050b036344983a52cd3d47d4ec, type: 3}
+    - {fileID: -1342120810765041982, guid: 438b24ce9ec3cd9478e9163ecb8e145c, type: 3}
+  - structureType: 1
+    sprites: []
+  - structureType: 2
+    sprites: []
+  - structureType: 3
+    sprites: []
+  - structureType: 5
+    sprites:
+    - {fileID: -9169979610214807350, guid: 876f2bd0ae4e30340902ef68e4cb0da2, type: 3}
+    - {fileID: -7956336632502707856, guid: d2a22939302f61f41af0a5b1445e7048, type: 3}

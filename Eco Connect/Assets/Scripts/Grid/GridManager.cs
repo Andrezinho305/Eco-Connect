@@ -23,7 +23,6 @@ public class GridManager : MonoBehaviour
 
 
 
-
     private void Awake()
     {
         if (levelData == null)
@@ -52,7 +51,6 @@ public class GridManager : MonoBehaviour
 
         LoadLevelStructures();
     }
-
 
 
     private void OnDrawGizmos()
@@ -229,6 +227,7 @@ public class GridManager : MonoBehaviour
             }
 
             cell.SetStructure(structure.structureType);
+            cell.SetVisualVariant(structure.visualVariant);
 
             if (structure.structureType == StructureType.Building)
             {

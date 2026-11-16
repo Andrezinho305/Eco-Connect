@@ -9,6 +9,8 @@ public class GridCell
     public StructureType Structure { get; private set; }
     public NetworkType RequiredServices { get; private set; }
 
+    public int VisualVariant { get; private set; }
+
 
     public bool CanBuildNetwork => Structure == StructureType.None;
 
@@ -19,6 +21,12 @@ public class GridCell
         Networks = NetworkType.None;
         Structure = StructureType.None;
         RequiredServices = NetworkType.None;
+        VisualVariant = 0;
+    }
+
+    public void SetVisualVariant(int variant)
+    {
+        VisualVariant = Mathf.Max(0, variant);
     }
 
     public bool HasNetwork(NetworkType type)

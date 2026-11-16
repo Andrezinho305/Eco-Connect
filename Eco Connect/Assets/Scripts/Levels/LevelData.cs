@@ -32,4 +32,7 @@ public class StructureData
     public StructureType structureType;
 
     public NetworkType requiredServices;
+
+    [Min(0)]
+    public int visualVariant = 0;
 }
