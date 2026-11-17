@@ -15,7 +15,7 @@ MonoBehaviour:
   levelName: Level 5
   width: 10
   height: 10
-  initialBudget: 13000
+  initialBudget: 11200
   structures:
   - position: {x: 5, y: 0}
     structureType: 5
@@ -45,16 +45,12 @@ MonoBehaviour:
     structureType: 5
     requiredServices: 0
     visualVariant: 1
-  - position: {x: 5, y: 9}
+  - position: {x: 7, y: 9}
     structureType: 2
     requiredServices: 0
     visualVariant: 0
-  - position: {x: 5, y: 6}
+  - position: {x: 0, y: 8}
     structureType: 1
-    requiredServices: 0
-    visualVariant: 0
-  - position: {x: 5, y: 4}
-    structureType: 3
     requiredServices: 0
     visualVariant: 0
   - position: {x: 3, y: 0}
@@ -63,7 +59,7 @@ MonoBehaviour:
     visualVariant: 1
   - position: {x: 1, y: 7}
     structureType: 4
-    requiredServices: -1
+    requiredServices: 6
     visualVariant: 1
   - position: {x: 9, y: 3}
     structureType: 4
@@ -74,7 +70,7 @@ MonoBehaviour:
     requiredServices: 3
     visualVariant: 1
   - position: {x: 8, y: 3}
-    structureType: 5
+    structureType: 3
     requiredServices: 0
     visualVariant: 1
   - position: {x: 2, y: 4}
@@ -84,4 +80,12 @@ MonoBehaviour:
   - position: {x: 9, y: 9}
     structureType: 4
     requiredServices: 4
+    visualVariant: 1
+  - position: {x: 5, y: 6}
+    structureType: 5
+    requiredServices: 0
+    visualVariant: 1
+  - position: {x: 5, y: 9}
+    structureType: 5
+    requiredServices: 0
     visualVariant: 1
