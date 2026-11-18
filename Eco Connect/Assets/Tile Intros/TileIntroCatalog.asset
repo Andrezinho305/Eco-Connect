@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e027244f5bede9743bbdac10f2d3058a, type: 3}
+  m_Name: TileIntroCatalog
+  m_EditorClassIdentifier: Assembly-CSharp::TileIntroCatalog
+  visualDatabase: {fileID: 11400000, guid: 7eed7180f79fcfc4ebc36f9e711e8b3c, type: 2}
+  elements:
+  - {fileID: 11400000, guid: b72b3436708cbf346a9f97e73d1328eb, type: 2}
+  - {fileID: 11400000, guid: 23a628f2a6f3fec48ba42189e588ac4c, type: 2}
+  - {fileID: 11400000, guid: 3b80ba0f836248541bba8d8d14905f6d, type: 2}
+  - {fileID: 11400000, guid: 94042fe8da202d343802d5147f4c0b65, type: 2}
+  - {fileID: 11400000, guid: ccbfd37b1340b8041ba962e11c53522e, type: 2}
+  - {fileID: 11400000, guid: 3caa2623c96f60a41875dfe4103a6b00, type: 2}
+  - {fileID: 11400000, guid: a11194a27269efe489bf99ffe711d757, type: 2}

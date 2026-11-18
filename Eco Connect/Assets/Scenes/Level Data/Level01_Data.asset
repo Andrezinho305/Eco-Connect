@@ -20,21 +20,31 @@ MonoBehaviour:
   - position: {x: 1, y: 1}
     structureType: 1
     requiredServices: 0
+    visualVariant: 0
   - position: {x: 8, y: 1}
     structureType: 2
     requiredServices: 0
+    visualVariant: 0
   - position: {x: 8, y: 8}
     structureType: 3
     requiredServices: 0
+    visualVariant: 0
   - position: {x: 3, y: 5}
     structureType: 4
     requiredServices: 3
+    visualVariant: 0
   - position: {x: 6, y: 5}
     structureType: 4
     requiredServices: -1
+    visualVariant: 0
   - position: {x: 4, y: 3}
     structureType: 5
     requiredServices: 0
+    visualVariant: 0
   - position: {x: 6, y: 4}
     structureType: 5
     requiredServices: 0
+    visualVariant: 0
+  newElements:
+  - {fileID: 11400000, guid: 3caa2623c96f60a41875dfe4103a6b00, type: 2}
+  - {fileID: 11400000, guid: ccbfd37b1340b8041ba962e11c53522e, type: 2}

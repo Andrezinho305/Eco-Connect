@@ -57,3 +57,5 @@ MonoBehaviour:
     structureType: 5
     requiredServices: 0
     visualVariant: 1
+  newElements:
+  - {fileID: 11400000, guid: a11194a27269efe489bf99ffe711d757, type: 2}

@@ -22,6 +22,11 @@ public class LevelData : ScriptableObject
     [Header("Estruturas")]
     public List<StructureData> structures =
         new List<StructureData>();
+
+    [Header("Novos elementos apresentados nesta fase")]
+    [Tooltip("Cada item vira um card \"Novo elemento!\" no início da fase")]
+    public List<TileIntroData> newElements =
+        new List<TileIntroData>();
 }
 
 [Serializable]

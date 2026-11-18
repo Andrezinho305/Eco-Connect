@@ -4,27 +4,11 @@ using UnityEngine.Serialization;
 
 public class MainMenuUI : MonoBehaviour
 {
-    [Header("Cenas")]
+    // Todo jogo novo começa pelo tutorial
     [FormerlySerializedAs("firstLevelSceneName")]
     [SerializeField] private string tutorialSceneName = "Level00_Tutorial";
 
-    // Cena aberta pelo "Jogar" depois que o tutorial foi concluído
-    [SerializeField] private string levelAfterTutorialSceneName = "Level01";
-
     public void PlayGame()
-    {
-        Time.timeScale = 1f;
-
-        string sceneToLoad = TutorialManager.IsTutorialCompleted
-            ? levelAfterTutorialSceneName
-            : tutorialSceneName;
-
-        SceneManager.LoadScene(sceneToLoad);
-    }
-
-    // Abre o tutorial mesmo que ele já tenha sido concluído
-    // (pode ser ligado a um botão "Tutorial" no menu)
-    public void PlayTutorial()
     {
         Time.timeScale = 1f;
 

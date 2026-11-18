@@ -34,6 +34,10 @@ public class PauseManager : MonoBehaviour
 
     private void HandleEscape()
     {
+        // Janelas abertas (card de elemento, Legenda) fecham primeiro
+        if (!IsPaused && OverlayEscape.TryConsume())
+            return;
+
         if (!IsPaused)
         {
             PauseGame();
