@@ -69,10 +69,15 @@ public class PauseManager : MonoBehaviour
         pausePanel.SetActive(true);
         pauseMenu.SetActive(true);
         settingsPanel.SetActive(false);
+
+        SFXManager.Play(Sfx.PanelOpen);
     }
 
     public void ResumeGame()
     {
+        if (IsPaused)
+            SFXManager.Play(Sfx.PanelClose);
+
         IsPaused = false;
 
         Time.timeScale = 1f;
@@ -89,12 +94,16 @@ public class PauseManager : MonoBehaviour
 
         pauseMenu.SetActive(false);
         settingsPanel.SetActive(true);
+
+        SFXManager.Play(Sfx.PanelOpen);
     }
 
     public void CloseSettings()
     {
         settingsPanel.SetActive(false);
         pauseMenu.SetActive(true);
+
+        SFXManager.Play(Sfx.PanelClose);
     }
 
     public void RestartLevel()

@@ -94,6 +94,9 @@ public class LevelIntroManager : MonoBehaviour
     {
         TileIntroData element = queue[currentIndex];
 
+        // Primeiro card abre o painel; os seguintes "viram a página"
+        SFXManager.Play(currentIndex == 0 ? Sfx.PanelOpen : Sfx.TutorialStep);
+
         cardUI.Show(
             element.title,
             element.description,
@@ -136,6 +139,8 @@ public class LevelIntroManager : MonoBehaviour
             return;
 
         isShowing = false;
+
+        SFXManager.Play(Sfx.PanelClose);
 
         highlighter.Clear();
         cardUI.SetVisible(false);

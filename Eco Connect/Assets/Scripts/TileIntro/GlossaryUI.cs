@@ -54,6 +54,9 @@ public class GlossaryUI : MonoBehaviour
         if (pauseManager != null && pauseManager.IsPaused)
             return;
 
+        if (!isOpen)
+            SFXManager.Play(Sfx.PanelOpen);
+
         isOpen = true;
         panel.SetActive(true);
 
@@ -62,6 +65,9 @@ public class GlossaryUI : MonoBehaviour
 
     public void Close()
     {
+        if (isOpen)
+            SFXManager.Play(Sfx.PanelClose);
+
         isOpen = false;
         panel.SetActive(false);
 

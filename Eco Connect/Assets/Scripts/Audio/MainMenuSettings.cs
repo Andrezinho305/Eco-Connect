@@ -25,22 +25,30 @@ public class MainMenuSettings : MonoBehaviour
     {
         creditsPanel.SetActive(false);
         settingsPanel.SetActive(true);
+
+        SFXManager.Play(Sfx.PanelOpen);
     }
 
     public void CloseSettings()
     {
         settingsPanel.SetActive(false);
+
+        SFXManager.Play(Sfx.PanelClose);
     }
 
     public void OpenCredits()
     {
         settingsPanel.SetActive(false);
         creditsPanel.SetActive(true);
+
+        SFXManager.Play(Sfx.PanelOpen);
     }
 
     public void CloseCredits()
     {
         creditsPanel.SetActive(false);
+
+        SFXManager.Play(Sfx.PanelClose);
     }
 }
 

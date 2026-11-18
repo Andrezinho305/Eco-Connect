@@ -180,6 +180,8 @@ public class TutorialManager : MonoBehaviour
 
         UpdateHighlights(step);
         SetVisible(true);
+
+        SFXManager.Play(Sfx.TutorialStep);
     }
 
     private void Finish()

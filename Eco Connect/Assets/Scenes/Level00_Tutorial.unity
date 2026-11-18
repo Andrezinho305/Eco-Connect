@@ -5186,6 +5186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1015481249}
+  - component: {fileID: 1015481250}
   m_Layer: 5
   m_Name: Settings Panel
   m_TagString: Untagged
@@ -5193,6 +5194,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1015481250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015481248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d7474cfd0acfc84d9f378a64d89e5a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioSettingsUI
+  musicVolumeSlider: {fileID: 615682874}
+  sfxVolumeSlider: {fileID: 2004444614}
 --- !u!224 &1015481249
 RectTransform:
   m_ObjectHideFlags: 0

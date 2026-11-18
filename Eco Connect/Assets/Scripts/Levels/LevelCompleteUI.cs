@@ -65,6 +65,9 @@ public class LevelCompleteUI : MonoBehaviour
             budgetManager.CurrentBudget.ToString("N0");
 
         victoryPanel.SetActive(true);
+
+        SFXManager.Play(Sfx.Victory);
+        SFXManager.PlayStars(earnedStars);
     }
 
     public void NextLevel()

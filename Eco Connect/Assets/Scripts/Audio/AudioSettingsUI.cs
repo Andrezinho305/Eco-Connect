@@ -50,6 +50,9 @@ public class AudioSettingsUI : MonoBehaviour
     {
         if (AudioSettingsManager.Instance != null)
             AudioSettingsManager.Instance.SetSFXVolume(value);
+
+        // Deixa ouvir o volume escolhido enquanto arrasta
+        SFXManager.Play(Sfx.VolumePreview);
     }
 }
 

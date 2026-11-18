@@ -9,34 +9,31 @@ public class BuildingStatusView : MonoBehaviour
     [SerializeField] private Color suppliedColor = Color.green;
     [SerializeField] private Color missingColor = Color.red;
 
+    // Serviços abastecidos na última atualização (para tocar som só quando muda)
+    private NetworkType lastSupplied;
+    private bool hasState;
+
     public void UpdateStatus(
         GridCell cell,
         NetworkConnectivity connectivity)
     {
-        UpdateService(
-            waterStatus,
-            cell,
-            connectivity,
-            NetworkType.Water
-        );
+        NetworkType supplied = NetworkType.None;
 
-        UpdateService(
-            electricityStatus,
-            cell,
-            connectivity,
-            NetworkType.Electricity
-        );
+        if (UpdateService(waterStatus, cell, connectivity, NetworkType.Water))
+            supplied |= NetworkType.Water;
 
-        UpdateService(
-            sewageStatus,
-            cell,
-            connectivity,
-            NetworkType.Sewage
-        );
+        if (UpdateService(electricityStatus, cell, connectivity, NetworkType.Electricity))
+            supplied |= NetworkType.Electricity;
+
+        if (UpdateService(sewageStatus, cell, connectivity, NetworkType.Sewage))
+            supplied |= NetworkType.Sewage;
+
+        PlayFeedback(cell, supplied);
     }
 
 
-    private void UpdateService(
+    // Retorna verdadeiro se o serviço é exigido e está abastecido
+    private bool UpdateService(
         SpriteRenderer indicator,
         GridCell cell,
         NetworkConnectivity connectivity,
@@ -48,7 +45,7 @@ public class BuildingStatusView : MonoBehaviour
         indicator.enabled = required;
 
         if (!required)
-            return;
+            return false;
 
         bool supplied = connectivity.IsBuildingSupplied(
             cell.Position,
@@ -57,7 +54,32 @@ public class BuildingStatusView : MonoBehaviour
 
         indicator.color =
             supplied ? suppliedColor : missingColor;
+
+        return supplied;
+    }
+
+
+    private void PlayFeedback(GridCell cell, NetworkType supplied)
+    {
+        // A primeira atualização (início da fase) não toca som
+        if (hasState)
+        {
+            NetworkType newlySupplied = supplied & ~lastSupplied;
+
+            if (newlySupplied != NetworkType.None)
+            {
+                bool complete =
+                    cell.RequiredServices != NetworkType.None &&
+                    supplied == cell.RequiredServices;
+
+                SFXManager.Play(
+                    complete ? Sfx.HouseComplete : Sfx.ServiceConnected
+                );
+            }
+        }
+
+        lastSupplied = supplied;
+        hasState = true;
     }
 
 }
-

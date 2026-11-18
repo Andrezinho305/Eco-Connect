@@ -14,6 +14,8 @@ public class AudioSettingsManager : MonoBehaviour
     public float MusicVolume { get; private set; } = 1f;
     public float SFXVolume { get; private set; } = 1f;
 
+    public AudioMixer Mixer => audioMixer;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -24,6 +26,11 @@ public class AudioSettingsManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        // Com o modo "Normal" o mixer congela quando Time.timeScale = 0
+        // (menu de pausa) e os sliders de volume não fazem efeito.
+        if (audioMixer != null)
+            audioMixer.updateMode = AudioMixerUpdateMode.UnscaledTime;
     }
 
     private void Start()

@@ -19,6 +19,9 @@ public class NetworkBuilder : MonoBehaviour
 
     private bool pointerStartedOverUI;
 
+    // Última célula recusada por falta de dinheiro (evita repetir o som)
+    private Vector2Int? lastDeniedCell;
+
     // Ferramentas liberadas (o tutorial libera aos poucos)
     private ToolMask allowedTools = ToolMask.All;
 
@@ -89,6 +92,8 @@ public class NetworkBuilder : MonoBehaviour
             pointerStartedOverUI =
                 EventSystem.current != null &&
                 EventSystem.current.IsPointerOverGameObject();
+
+            lastDeniedCell = null;
         }
 
         // Impede construções iniciadas sobre a interface
@@ -149,6 +154,8 @@ public class NetworkBuilder : MonoBehaviour
 
             // Devolve o dinheiro
             budgetManager.Refund(refund);
+
+            SFXManager.Play(Sfx.Erase);
         }
         else
         {
@@ -165,12 +172,22 @@ public class NetworkBuilder : MonoBehaviour
             // Verifica o orçamento disponível
             if (!budgetManager.TrySpend(cost))
             {
-                Debug.Log("Orçamento insuficiente!");
+                // Toca uma vez por célula, não a cada frame
+                if (lastDeniedCell != gridPosition)
+                {
+                    lastDeniedCell = gridPosition;
+
+                    Debug.Log("Orçamento insuficiente!");
+                    SFXManager.Play(Sfx.NoMoney);
+                }
+
                 return;
             }
 
             // Adiciona a rede
             cell.AddNetwork(selectedNetwork);
+
+            SFXManager.Play(GetBuildSound(selectedNetwork));
         }
 
         // Atualiza os elementos visuais
@@ -209,8 +226,13 @@ public class NetworkBuilder : MonoBehaviour
         if (!IsToolAllowed(ToolMask.Eraser))
             return;
 
+        bool changed = !hasToolSelected || !eraseMode;
+
         eraseMode = true;
         hasToolSelected = true;
+
+        if (changed)
+            SFXManager.Play(Sfx.ToolSwitch);
 
         OnToolChanged?.Invoke();
     }
@@ -220,11 +242,32 @@ public class NetworkBuilder : MonoBehaviour
         if (!IsToolAllowed((ToolMask)(int)network))
             return;
 
+        bool changed =
+            !hasToolSelected || eraseMode || selectedNetwork != network;
+
         selectedNetwork = network;
         eraseMode = false;
         hasToolSelected = true;
 
+        if (changed)
+            SFXManager.Play(Sfx.ToolSwitch);
+
         OnToolChanged?.Invoke();
+    }
+
+    private static Sfx GetBuildSound(NetworkType network)
+    {
+        switch (network)
+        {
+            case NetworkType.Electricity:
+                return Sfx.BuildElectricity;
+
+            case NetworkType.Sewage:
+                return Sfx.BuildSewage;
+
+            default:
+                return Sfx.BuildWater;
+        }
     }
 
 
