@@ -22,6 +22,9 @@ public class ConstructionCostPreview : MonoBehaviour
     {
         costText.enabled = false;
 
+        if (!networkBuilder.CanUseCurrentTool)
+            return;
+
         if (EventSystem.current != null &&
             EventSystem.current.IsPointerOverGameObject())
             return;

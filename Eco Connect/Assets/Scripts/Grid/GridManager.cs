@@ -16,6 +16,7 @@ public class GridManager : MonoBehaviour
 
     public int Width => width;
     public int Height => height;
+    public float CellSize => cellSize;
 
     private Vector2Int hoveredCell = new Vector2Int(-1, -1);
 

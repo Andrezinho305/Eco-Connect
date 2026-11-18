@@ -19,11 +19,34 @@ public class NetworkBuilder : MonoBehaviour
 
     private bool pointerStartedOverUI;
 
+    // Ferramentas liberadas (o tutorial libera aos poucos)
+    private ToolMask allowedTools = ToolMask.All;
+
+    // Falso quando nenhuma ferramenta está selecionada
+    private bool hasToolSelected = true;
+
     public NetworkType SelectedNetwork => selectedNetwork;
 
     public bool IsEraseMode => eraseMode;
 
+    public bool HasToolSelected => hasToolSelected;
+
+    public ToolMask AllowedTools => allowedTools;
+
+    public ToolMask CurrentTool =>
+        eraseMode ? ToolMask.Eraser : (ToolMask)(int)selectedNetwork;
+
+    // Verdadeiro se a ferramenta atual pode ser usada para construir/apagar
+    public bool CanUseCurrentTool =>
+        hasToolSelected && IsToolAllowed(CurrentTool);
+
     public event Action OnToolChanged;
+
+    // Disparado após construir uma rede (posição, rede construída)
+    public event Action<Vector2Int, NetworkType> OnNetworkBuilt;
+
+    // Disparado após apagar as redes de uma célula
+    public event Action<Vector2Int> OnNetworkErased;
 
 
     private void Update()
@@ -79,6 +102,10 @@ public class NetworkBuilder : MonoBehaviour
 
         // Só permite construir enquanto o botão estiver pressionado
         if (!Input.GetMouseButton(0))
+            return;
+
+        // Impede usar ferramentas não selecionadas ou bloqueadas
+        if (!CanUseCurrentTool)
             return;
 
         Camera mainCamera = Camera.main;
@@ -151,6 +178,12 @@ public class NetworkBuilder : MonoBehaviour
         gridRenderer.RefreshAllBuildings();
 
         levelManager.CheckLevelCompletion();
+
+        // Notifica quem estiver acompanhando (ex.: tutorial)
+        if (eraseMode)
+            OnNetworkErased?.Invoke(gridPosition);
+        else
+            OnNetworkBuilt?.Invoke(gridPosition, selectedNetwork);
     }
 
 
@@ -158,31 +191,65 @@ public class NetworkBuilder : MonoBehaviour
 
     public void SelectWater()
     {
-        selectedNetwork = NetworkType.Water;
-        eraseMode = false;
-
-        OnToolChanged?.Invoke();
+        SelectNetwork(NetworkType.Water);
     }
 
     public void SelectElectricity()
     {
-        selectedNetwork = NetworkType.Electricity;
-        eraseMode = false;
-
-        OnToolChanged?.Invoke();
+        SelectNetwork(NetworkType.Electricity);
     }
 
     public void SelectSewage()
     {
-        selectedNetwork = NetworkType.Sewage;
-        eraseMode = false;
-
-        OnToolChanged?.Invoke();
+        SelectNetwork(NetworkType.Sewage);
     }
 
     public void SelectEraser()
     {
+        if (!IsToolAllowed(ToolMask.Eraser))
+            return;
+
         eraseMode = true;
+        hasToolSelected = true;
+
+        OnToolChanged?.Invoke();
+    }
+
+    private void SelectNetwork(NetworkType network)
+    {
+        if (!IsToolAllowed((ToolMask)(int)network))
+            return;
+
+        selectedNetwork = network;
+        eraseMode = false;
+        hasToolSelected = true;
+
+        OnToolChanged?.Invoke();
+    }
+
+
+    public bool IsToolAllowed(ToolMask tool)
+    {
+        return tool != ToolMask.None &&
+               (allowedTools & tool) == tool;
+    }
+
+    // Define quais ferramentas podem ser usadas.
+    // Se a ferramenta atual for bloqueada, ela é desmarcada.
+    public void SetAllowedTools(ToolMask tools)
+    {
+        allowedTools = tools;
+
+        if (hasToolSelected && !IsToolAllowed(CurrentTool))
+            hasToolSelected = false;
+
+        OnToolChanged?.Invoke();
+    }
+
+    // Deixa o jogador sem nenhuma ferramenta selecionada
+    public void DeselectTool()
+    {
+        hasToolSelected = false;
 
         OnToolChanged?.Invoke();
     }

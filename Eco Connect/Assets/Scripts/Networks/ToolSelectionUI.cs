@@ -14,6 +14,7 @@ public class ToolSelectionUI : MonoBehaviour
     [Header("Cores")]
     [SerializeField] private Color selectedColor = Color.green;
     [SerializeField] private Color normalColor = Color.white;
+    [SerializeField] private Color lockedColor = new Color(0.4f, 0.4f, 0.4f, 0.5f);
 
     private void OnEnable()
     {
@@ -34,10 +35,13 @@ public class ToolSelectionUI : MonoBehaviour
 
     private void UpdateSelection()
     {
-        waterButton.color = normalColor;
-        electricityButton.color = normalColor;
-        sewageButton.color = normalColor;
-        eraserButton.color = normalColor;
+        UpdateButtonState(waterButton, ToolMask.Water);
+        UpdateButtonState(electricityButton, ToolMask.Electricity);
+        UpdateButtonState(sewageButton, ToolMask.Sewage);
+        UpdateButtonState(eraserButton, ToolMask.Eraser);
+
+        if (!networkBuilder.HasToolSelected)
+            return;
 
         if (networkBuilder.IsEraseMode)
         {
@@ -59,6 +63,19 @@ public class ToolSelectionUI : MonoBehaviour
                 sewageButton.color = selectedColor;
                 break;
         }
+    }
+
+    // Aplica a cor normal ou bloqueada e desativa o clique se bloqueado
+    private void UpdateButtonState(Image buttonImage, ToolMask tool)
+    {
+        bool allowed = networkBuilder.IsToolAllowed(tool);
+
+        buttonImage.color = allowed ? normalColor : lockedColor;
+
+        Button button = buttonImage.GetComponent<Button>();
+
+        if (button != null)
+            button.interactable = allowed;
     }
 }
 
