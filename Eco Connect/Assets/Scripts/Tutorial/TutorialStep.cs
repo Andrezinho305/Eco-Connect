@@ -102,7 +102,7 @@ public class TutorialStep
                 message =
                     "Estas são as casas. Os indicadores mostram o " +
                     "serviço que cada uma precisa:\n\n" +
-                    "• Vermelho: o serviço ainda não chegou\n" +
+                    "• Preto: o serviço ainda não chegou\n" +
                     "• Verde: casa abastecida!",
                 highlightCells =
                 {
