@@ -145,6 +145,7 @@ public static class MassinhaThemeTool
         {
             // Versões antigas tinham ~22 mil registros de kerning de alfabetos que
             // não usamos (10–14 MB por arquivo). Regenera a partir da fonte já cortada.
+            // O kerning é gravado pelo TMP quando o texto é desenhado pela primeira vez.
             if (new System.IO.FileInfo(assetPath).Length > 6 * 1024 * 1024)
                 RebuildFontData(existing);
 
@@ -199,10 +200,17 @@ public static class MassinhaThemeTool
         asset.ClearFontAssetData(true);
         asset.TryAddCharacters(CommonCharacters, out _);
 
+        // O TMP calcula o kerning numa fila adiada; processa agora para que seja salvo
+        typeof(TMP_FontAsset)
+            .GetMethod("UpdateFontAssetsInUpdateQueue",
+                System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static)
+            ?.Invoke(null, null);
+
         EditorUtility.SetDirty(asset);
         AssetDatabase.SaveAssets();
 
-        Debug.Log("[Tema Massinha] Fonte regenerada: " + asset.name);
+        Debug.Log("[Tema Massinha] Fonte regenerada: " + asset.name +
+                  " (" + asset.fontFeatureTable.glyphPairAdjustmentRecords.Count + " pares de kerning)");
     }
 
     // Material do logo: contorno verde-escuro + "degrau" embaixo
@@ -799,7 +807,7 @@ public static class MassinhaThemeTool
     {
         RectTransform panel = Rect(budget);
         SetImage(panel.gameObject, "card");
-        Place(panel, new Vector2(0, 1), new Vector2(0, 1), new Vector2(40, -138), new Vector2(420, 160));
+        Place(panel, new Vector2(0, 1), new Vector2(0, 1), new Vector2(40, -138), new Vector2(420, 184));
 
         RectTransform coin = Child(panel, "Coin");
         SetImage(coin.gameObject, "bubble_sun", sliced: false).preserveAspect = true;
@@ -819,7 +827,7 @@ public static class MassinhaThemeTool
 
         TMP_Text initial = TextChild(panel, "Initial");
         SetText(initial, nunitoExtraBold, 22, Muted, TextAlignmentOptions.MidlineLeft, "de 5.000");
-        Place(Rect(initial), new Vector2(0, 1), new Vector2(0, 1), new Vector2(118, -68), new Vector2(200, 26));
+        Place(Rect(initial), new Vector2(0, 1), new Vector2(0, 1), new Vector2(118, -66), new Vector2(200, 24));
 
         // Nota atual (estrelas no canto)
         RectTransform rating = Child(panel, "Rating");
@@ -848,8 +856,8 @@ public static class MassinhaThemeTool
         bar.anchorMin = new Vector2(0, 0);
         bar.anchorMax = new Vector2(1, 0);
         bar.pivot = new Vector2(0.5f, 0);
-        bar.offsetMin = new Vector2(116, 46);
-        bar.offsetMax = new Vector2(-24, 70);
+        bar.offsetMin = new Vector2(116, 60);
+        bar.offsetMax = new Vector2(-24, 82);
         bar.localRotation = Quaternion.identity;
         bar.localScale = Vector3.one;
         SetImage(bar.gameObject, "slider_track");
@@ -890,7 +898,7 @@ public static class MassinhaThemeTool
         tick.anchorMin = new Vector2(position, 0);
         tick.anchorMax = new Vector2(position, 1);
         tick.pivot = new Vector2(0.5f, 0.5f);
-        tick.sizeDelta = new Vector2(5, 14);
+        tick.sizeDelta = new Vector2(5, 8);
         tick.anchoredPosition = Vector2.zero;
         tick.localRotation = Quaternion.identity;
         tick.localScale = Vector3.one;
@@ -901,7 +909,7 @@ public static class MassinhaThemeTool
         line.raycastTarget = false;
 
         RectTransform label = Child(tick, "Label");
-        Place(label, new Vector2(0.5f, 0), new Vector2(0.5f, 1), new Vector2(0, -2), new Vector2(40, 20));
+        Place(label, new Vector2(0.5f, 0), new Vector2(0.5f, 1), new Vector2(0, -6), new Vector2(40, 20));
 
         HorizontalLayoutGroup layout = Comp<HorizontalLayoutGroup>(label.gameObject);
         layout.spacing = 1;
@@ -925,7 +933,7 @@ public static class MassinhaThemeTool
     private static void StyleTools(ToolSelectionUI tools)
     {
         RectTransform panel = Rect(tools);
-        Place(panel, new Vector2(0, 1), new Vector2(0, 1), new Vector2(40, -336), new Vector2(330, 112 * 4 + 16 * 3));
+        Place(panel, new Vector2(0, 1), new Vector2(0, 1), new Vector2(40, -348), new Vector2(330, 112 * 4 + 16 * 3));
 
         VerticalLayoutGroup layout = Comp<VerticalLayoutGroup>(panel.gameObject);
         layout.spacing = 16;
@@ -1027,7 +1035,7 @@ public static class MassinhaThemeTool
     {
         RectTransform panel = Rect(progress);
         SetImage(panel.gameObject, "btn_cream");
-        Place(panel, new Vector2(1, 1), new Vector2(1, 1), new Vector2(-40, -156), new Vector2(360, 112));
+        Place(panel, new Vector2(1, 1), new Vector2(1, 1), new Vector2(-40, -156), new Vector2(380, 112));
 
         TMP_Text text = Ref<TMP_Text>(progress, "progressText");
 
@@ -1047,10 +1055,10 @@ public static class MassinhaThemeTool
         }
 
         RectTransform houses = Child(panel, "Houses");
-        Place(houses, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(24, 6), new Vector2(232, 52));
+        Place(houses, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(24, 6), new Vector2(240, 52));
 
         HorizontalLayoutGroup layout = Comp<HorizontalLayoutGroup>(houses.gameObject);
-        layout.spacing = 5;
+        layout.spacing = 4;
         layout.childAlignment = TextAnchor.MiddleLeft;
         layout.childControlWidth = false;
         layout.childControlHeight = false;
@@ -1060,7 +1068,7 @@ public static class MassinhaThemeTool
         RectTransform template = Child(houses, "House Template");
         Image templateImage = SetImage(template.gameObject, "house_badge", sliced: false);
         templateImage.preserveAspect = true;
-        template.sizeDelta = new Vector2(34, 34);
+        template.sizeDelta = new Vector2(36, 36);
 
         SerializedObject so = new SerializedObject(progress);
         so.FindProperty("houseTemplate").objectReferenceValue = templateImage;
