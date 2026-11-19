@@ -65,6 +65,8 @@ public static class MassinhaThemeTool
         if (victory != null) StyleVictory(victory);
         if (tools != null) StyleHud(tools, pause);
 
+        StyleOverlays();
+
         if (mainMenu == null && pause == null && victory == null && tools == null)
         {
             EditorUtility.DisplayDialog(
@@ -1163,6 +1165,344 @@ public static class MassinhaThemeTool
         so.FindProperty("sprite").objectReferenceValue = LoadSprite("cell_hover");
         so.FindProperty("insufficientColor").colorValue = StampRed;
         so.ApplyModifiedPropertiesWithoutUndo();
+    }
+
+
+    // ================================================================
+    // Painéis da fase: tutorial, "Novo elemento!" e Legenda
+    // ================================================================
+
+    private const string CatalogPath = "Assets/Tile Intros/TileIntroCatalog.asset";
+
+    private static void StyleOverlays()
+    {
+        TutorialUI tutorial = FindInScene<TutorialUI>();
+        TileIntroCardUI introCard = FindInScene<TileIntroCardUI>();
+        GlossaryUI glossary = FindInScene<GlossaryUI>();
+        LevelIntroManager intro = FindInScene<LevelIntroManager>();
+
+        if (tutorial != null) StyleTutorialPanel(tutorial);
+        if (introCard != null) StyleIntroCard(introCard);
+        if (glossary != null) StyleGlossary(glossary);
+
+        // Bug antigo: o catálogo nunca foi ligado, então a Legenda vinha vazia
+        // e o card "Novo elemento!" ficava sem ícone
+        TileIntroCatalog catalog = AssetDatabase.LoadAssetAtPath<TileIntroCatalog>(CatalogPath);
+
+        if (catalog == null)
+            return;
+
+        foreach (Object owner in new Object[] { glossary, intro })
+        {
+            if (owner != null && Ref<TileIntroCatalog>(owner, "catalog") == null)
+            {
+                SetRef(owner, "catalog", catalog);
+                Report.Add("• Catálogo de elementos ligado em " + owner.GetType().Name);
+            }
+        }
+    }
+
+    private static void StyleTutorialPanel(TutorialUI tutorial)
+    {
+        RectTransform panel = Rect(tutorial);
+
+        SetImage(panel.gameObject, "card", raycast: true);
+        Place(panel, new Vector2(1, 1), new Vector2(1, 1), new Vector2(-40, -300), new Vector2(420, 380));
+
+        VerticalLayoutGroup layout = Comp<VerticalLayoutGroup>(panel.gameObject);
+        layout.padding = new RectOffset(34, 34, 70, 44);
+        layout.spacing = 18;
+        layout.childAlignment = TextAnchor.UpperCenter;
+        layout.childControlWidth = true;
+        layout.childControlHeight = true;
+        layout.childForceExpandWidth = true;
+        layout.childForceExpandHeight = false;
+
+        ContentSizeFitter fit = Comp<ContentSizeFitter>(panel.gameObject);
+        fit.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
+        fit.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+
+        TMP_Text message = Ref<TMP_Text>(tutorial, "messageText");
+        TMP_Text step = Ref<TMP_Text>(tutorial, "stepCounterText");
+        Button continueButton = Ref<Button>(tutorial, "continueButton");
+        TMP_Text continueLabel = Ref<TMP_Text>(tutorial, "continueButtonLabel");
+        Button skipButton = Ref<Button>(tutorial, "skipButton");
+
+        if (message != null)
+        {
+            message.transform.SetParent(panel, false);
+            message.transform.SetSiblingIndex(0);
+            SetText(message, nunitoBold, 30, Ink, TextAlignmentOptions.TopLeft);
+            message.textWrappingMode = TextWrappingModes.Normal;
+            message.lineSpacing = 4;
+        }
+
+        if (continueButton != null)
+        {
+            continueButton.transform.SetParent(panel, false);
+            continueButton.transform.SetSiblingIndex(1);
+
+            string label = continueLabel != null ? continueLabel.text : "Continuar";
+            StyleButton(continueButton, "green", label, null, 32);
+
+            LayoutElement element = Comp<LayoutElement>(continueButton.gameObject);
+            element.preferredHeight = element.minHeight = 88;
+        }
+
+        if (skipButton != null)
+        {
+            skipButton.transform.SetParent(panel, false);
+            skipButton.transform.SetSiblingIndex(2);
+            StyleButton(skipButton, "cream", "Pular tutorial", null, 26);
+
+            LayoutElement element = Comp<LayoutElement>(skipButton.gameObject);
+            element.preferredHeight = element.minHeight = 76;
+        }
+
+        // "Passo 5/11" numa faixa no topo (fora do layout)
+        if (step != null)
+        {
+            RectTransform ribbon = Child(panel, "Step Ribbon");
+            Comp<LayoutElement>(ribbon.gameObject).ignoreLayout = true;
+            SetImage(ribbon.gameObject, "ribbon");
+            Place(ribbon, new Vector2(0.5f, 1), new Vector2(0.5f, 0.5f), new Vector2(0, 4), new Vector2(230, 76));
+            ribbon.SetAsLastSibling();
+
+            step.transform.SetParent(ribbon, false);
+            SetText(step, fredokaBold, 30, Color.white, TextAlignmentOptions.Center);
+            Stretch(Rect(step), 20, 9, 20, 0);
+        }
+
+        Report.Add("• Caixa do tutorial");
+    }
+
+    private static void StyleIntroCard(TileIntroCardUI cardUI)
+    {
+        GameObject root = Ref<GameObject>(cardUI, "root");
+        Image icon = Ref<Image>(cardUI, "icon");
+
+        if (root == null || icon == null)
+            return;
+
+        RectTransform card = icon.transform.parent as RectTransform;
+
+        if (card != null && card.name == "Icon Bubble")
+            card = card.parent as RectTransform;
+
+        if (card == null)
+            return;
+
+        Image overlay = root.GetComponent<Image>();
+
+        if (overlay != null)
+        {
+            overlay.sprite = null;
+            overlay.color = DimColor;
+        }
+
+        SetImage(card.gameObject, "card", raycast: true);
+        Place(card, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(760, 720));
+
+        TMP_Text header = FindText(card, "Header");
+
+        if (header != null)
+            MakeRibbon(card, header, "Novo elemento!");
+
+        // Ícone do elemento numa bolha creme
+        RectTransform bubble = Child(card, "Icon Bubble");
+        SetImage(bubble.gameObject, "bubble_white", Hex("#FFF6E3"), sliced: false).preserveAspect = true;
+        Place(bubble, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -82), new Vector2(190, 190));
+
+        icon.transform.SetParent(bubble, false);
+        icon.preserveAspect = true;
+        Place(icon.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(124, 124));
+
+        TMP_Text title = Ref<TMP_Text>(cardUI, "titleText");
+
+        if (title != null)
+        {
+            SetText(title, fredokaBold, 50, Ink, TextAlignmentOptions.Center);
+            Place(Rect(title), new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -290), new Vector2(680, 64));
+        }
+
+        TMP_Text description = Ref<TMP_Text>(cardUI, "descriptionText");
+
+        if (description != null)
+        {
+            SetText(description, nunitoBold, 30, Ink, TextAlignmentOptions.Top);
+            description.textWrappingMode = TextWrappingModes.Normal;
+            Place(Rect(description), new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -366), new Vector2(640, 170));
+        }
+
+        TMP_Text page = Ref<TMP_Text>(cardUI, "pageText");
+
+        if (page != null)
+        {
+            SetText(page, nunitoExtraBold, 26, Muted, TextAlignmentOptions.MidlineRight);
+            Place(Rect(page), new Vector2(1, 1), new Vector2(1, 1), new Vector2(-40, -28), new Vector2(90, 40));
+        }
+
+        // Botões numa linha centralizada (se "Pular" sumir, "Entendi" fica no meio)
+        RectTransform buttons = Child(card, "Buttons");
+        Place(buttons, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 44), new Vector2(560, 104));
+
+        HorizontalLayoutGroup layout = Comp<HorizontalLayoutGroup>(buttons.gameObject);
+        layout.spacing = 24;
+        layout.childAlignment = TextAnchor.MiddleCenter;
+        layout.childControlWidth = true;
+        layout.childControlHeight = true;
+        layout.childForceExpandWidth = false;
+        layout.childForceExpandHeight = false;
+
+        Button skip = Ref<Button>(cardUI, "skipButton");
+
+        if (skip != null)
+        {
+            skip.transform.SetParent(buttons, false);
+            skip.transform.SetSiblingIndex(0);
+            StyleButton(skip, "cream", "Pular", null, 34);
+
+            LayoutElement element = Comp<LayoutElement>(skip.gameObject);
+            element.preferredWidth = 230;
+            element.preferredHeight = 100;
+        }
+
+        Button next = Ref<Button>(cardUI, "nextButton");
+
+        if (next != null)
+        {
+            next.transform.SetParent(buttons, false);
+            next.transform.SetAsLastSibling();
+
+            TMP_Text nextLabel = Ref<TMP_Text>(cardUI, "nextButtonLabel");
+            StyleButton(next, "green", nextLabel != null ? nextLabel.text : "Entendi", null, 34);
+
+            LayoutElement element = Comp<LayoutElement>(next.gameObject);
+            element.preferredWidth = 250;
+            element.preferredHeight = 100;
+        }
+
+        UIPanelPop pop = Comp<UIPanelPop>(root);
+        SetRef(pop, "card", card);
+
+        Report.Add("• Card \"Novo elemento!\"");
+    }
+
+    private static void StyleGlossary(GlossaryUI glossary)
+    {
+        GameObject panel = Ref<GameObject>(glossary, "panel");
+
+        if (panel == null)
+            return;
+
+        RectTransform window = panel.transform.Find("Window") as RectTransform;
+
+        if (window == null)
+        {
+            Report.Add("  (Legenda sem objeto Window)");
+            return;
+        }
+
+        Image overlay = panel.GetComponent<Image>();
+
+        if (overlay != null)
+        {
+            overlay.sprite = null;
+            overlay.color = DimColor;
+        }
+
+        SetImage(window.gameObject, "card", raycast: true);
+        Place(window, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(940, 780));
+
+        TMP_Text title = window.Find("Title")?.GetComponent<TMP_Text>()
+                         ?? window.Find("Ribbon/Title")?.GetComponent<TMP_Text>();
+
+        if (title != null)
+            MakeRibbon(window, title, "Legenda");
+
+        Button close = Ref<Button>(glossary, "closeButton");
+
+        if (close != null)
+        {
+            StyleButton(close, "cream", "X", null, 40);
+            Place((RectTransform)close.transform, new Vector2(1, 1), new Vector2(0.5f, 0.5f),
+                new Vector2(-34, -34), new Vector2(88, 92));
+            close.transform.SetAsLastSibling();
+        }
+
+        RectTransform scroll = window.Find("Scroll View") as RectTransform;
+
+        if (scroll != null)
+        {
+            Stretch(scroll, 40, 50, 40, 96);
+
+            Image scrollImage = scroll.GetComponent<Image>();
+
+            if (scrollImage != null)
+                scrollImage.color = new Color(1, 1, 1, 0);
+        }
+
+        RectTransform content = Ref<RectTransform>(glossary, "contentRoot");
+
+        if (content != null)
+        {
+            VerticalLayoutGroup layout = Comp<VerticalLayoutGroup>(content.gameObject);
+            layout.spacing = 16;
+            layout.padding = new RectOffset(4, 4, 4, 4);
+            layout.childControlWidth = true;
+            layout.childControlHeight = true;
+            layout.childForceExpandWidth = true;
+            layout.childForceExpandHeight = false;
+        }
+
+        GlossaryRowUI row = Ref<GlossaryRowUI>(glossary, "rowTemplate");
+
+        if (row != null)
+        {
+            SetImage(row.gameObject, "pill_white");
+
+            LayoutElement element = Comp<LayoutElement>(row.gameObject);
+            element.preferredHeight = element.minHeight = 180;
+
+            Image rowIcon = Ref<Image>(row, "icon");
+
+            if (rowIcon != null)
+            {
+                rowIcon.preserveAspect = true;
+                Place(rowIcon.rectTransform, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(26, 0), new Vector2(96, 96));
+            }
+
+            TMP_Text rowTitle = Ref<TMP_Text>(row, "titleText");
+
+            if (rowTitle != null)
+            {
+                SetText(rowTitle, fredokaSemiBold, 34, Ink, TextAlignmentOptions.TopLeft);
+                RectTransform r = Rect(rowTitle);
+                r.anchorMin = new Vector2(0, 1);
+                r.anchorMax = new Vector2(1, 1);
+                r.pivot = new Vector2(0, 1);
+                r.offsetMin = new Vector2(140, -62);
+                r.offsetMax = new Vector2(-30, -18);
+                r.localRotation = Quaternion.identity;
+                r.localScale = Vector3.one;
+            }
+
+            TMP_Text rowDescription = Ref<TMP_Text>(row, "descriptionText");
+
+            if (rowDescription != null)
+            {
+                SetText(rowDescription, nunitoBold, 24, Muted, TextAlignmentOptions.TopLeft);
+                rowDescription.textWrappingMode = TextWrappingModes.Normal;
+                rowDescription.overflowMode = TextOverflowModes.Ellipsis;
+                rowDescription.lineSpacing = -4;
+                Stretch(Rect(rowDescription), 140, 16, 30, 62);
+            }
+        }
+
+        UIPanelPop pop = Comp<UIPanelPop>(panel);
+        SetRef(pop, "card", window);
+
+        Report.Add("• Legenda");
     }
 
 
