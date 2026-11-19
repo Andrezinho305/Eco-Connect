@@ -179,6 +179,7 @@ public class NetworkBuilder : MonoBehaviour
 
                     Debug.Log("Orçamento insuficiente!");
                     SFXManager.Play(Sfx.NoMoney);
+                    budgetManager.ReportInsufficientFunds();
                 }
 
                 return;

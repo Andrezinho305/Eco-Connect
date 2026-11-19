@@ -1,6 +1,8 @@
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ConstructionCostPreview : MonoBehaviour
 {
@@ -13,14 +15,37 @@ public class ConstructionCostPreview : MonoBehaviour
     [SerializeField] private Color availableColor = Color.white;
     [SerializeField] private Color insufficientColor = Color.red;
 
+    [Header("Tema (opcional)")]
+    [Tooltip("Pílula de fundo que acompanha o cursor (o texto fica dentro dela)")]
+    [SerializeField] private RectTransform pill;
+    [SerializeField] private Color refundColor = new Color(0.12f, 0.48f, 0.23f);
+
+    private static readonly CultureInfo PtBr = new CultureInfo("pt-BR");
+
+    private Image pillImage;
+
+    private void Awake()
+    {
+        if (pill != null)
+            pillImage = pill.GetComponent<Image>();
+    }
+
     private void Update()
     {
         UpdatePreview();
     }
 
+    private void SetVisible(bool visible)
+    {
+        costText.enabled = visible;
+
+        if (pillImage != null)
+            pillImage.enabled = visible;
+    }
+
     private void UpdatePreview()
     {
-        costText.enabled = false;
+        SetVisible(false);
 
         if (!networkBuilder.CanUseCurrentTool)
             return;
@@ -60,8 +85,8 @@ public class ConstructionCostPreview : MonoBehaviour
 
             cost = budgetManager.GetCellCost(cell.Networks);
 
-            costText.text = "+ R$ " + cost;
-            costText.color = availableColor;
+            costText.text = "+ R$ " + cost.ToString("N0", PtBr);
+            costText.color = pill != null ? refundColor : availableColor;
         }
         else
         {
@@ -73,7 +98,7 @@ public class ConstructionCostPreview : MonoBehaviour
                 networkBuilder.SelectedNetwork
             );
 
-            costText.text = "- R$ " + cost;
+            costText.text = "− R$ " + cost.ToString("N0", PtBr);
 
             costText.color =
                 cost <= budgetManager.CurrentBudget
@@ -81,10 +106,11 @@ public class ConstructionCostPreview : MonoBehaviour
                 : insufficientColor;
         }
 
-        costText.enabled = true;
+        SetVisible(true);
 
-        costText.transform.position =
+        Transform follow = pill != null ? pill : costText.transform;
+
+        follow.position =
             Input.mousePosition + new Vector3(20, 20, 0);
     }
 }
-

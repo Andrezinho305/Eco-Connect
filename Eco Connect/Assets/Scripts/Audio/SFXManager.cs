@@ -24,7 +24,8 @@ public enum Sfx
     PanelOpen,
     PanelClose,
     TutorialStep,
-    VolumePreview
+    VolumePreview,
+    Stamp
 }
 
 // Toca os efeitos sonoros e o som ambiente.
@@ -44,18 +45,20 @@ public class SFXManager : MonoBehaviour
     private const float FirstStarDelay = 0.75f;
     private const float StarInterval = 0.3f;
 
-    // Arquivo, variação de tom (+/-) e intervalo mínimo entre repetições
+    // Arquivo, variação de tom (+/-), intervalo mínimo entre repetições e tom base
     private struct SfxDefinition
     {
         public string file;
         public float pitchVariation;
         public float cooldown;
+        public float basePitch;
 
-        public SfxDefinition(string file, float pitchVariation, float cooldown)
+        public SfxDefinition(string file, float pitchVariation, float cooldown, float basePitch = 1f)
         {
             this.file = file;
             this.pitchVariation = pitchVariation;
             this.cooldown = cooldown;
+            this.basePitch = basePitch;
         }
     }
 
@@ -79,6 +82,8 @@ public class SFXManager : MonoBehaviour
             { Sfx.PanelClose,       new SfxDefinition("panel_close",       0f,    0.05f) },
             { Sfx.TutorialStep,     new SfxDefinition("tutorial_step",     0f,    0.1f) },
             { Sfx.VolumePreview,    new SfxDefinition("service_connected", 0f,    0.15f) },
+            // Carimbo "Aprovado": o baque do esgoto, mais grave
+            { Sfx.Stamp,            new SfxDefinition("build_sewage",      0f,    0.3f, 0.8f) },
         };
 
     private static SFXManager instance;
@@ -106,6 +111,14 @@ public class SFXManager : MonoBehaviour
     {
         if (instance != null)
             instance.pending.Add(sfx);
+    }
+
+    // Nota de uma estrela (0, 1, 2 → notas subindo)
+    public static void PlayStar(int index)
+    {
+        Sfx[] stars = { Sfx.Star1, Sfx.Star2, Sfx.Star3 };
+
+        Play(stars[Mathf.Clamp(index, 0, stars.Length - 1)]);
     }
 
     // Uma nota por estrela ganha, subindo (1, 2, 3)
@@ -299,7 +312,8 @@ public class SFXManager : MonoBehaviour
         nextVoice = (nextVoice + 1) % voices.Length;
 
         voice.clip = clip;
-        voice.pitch = 1f + Random.Range(-definition.pitchVariation, definition.pitchVariation);
+        voice.pitch = definition.basePitch +
+                      Random.Range(-definition.pitchVariation, definition.pitchVariation);
         voice.Play();
     }
 

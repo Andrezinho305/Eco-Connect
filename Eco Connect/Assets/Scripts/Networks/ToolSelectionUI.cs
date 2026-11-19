@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,19 @@ public class ToolSelectionUI : MonoBehaviour
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color lockedColor = new Color(0.4f, 0.4f, 0.4f, 0.5f);
 
+    [Header("Tema (opcional)")]
+    [Tooltip("Com sprites definidos, a seleção troca o sprite em vez de pintar o botão")]
+    [SerializeField] private Sprite normalSprite;
+    [SerializeField] private Sprite selectedSprite;
+
+    [Tooltip("Preço mostrado em cada botão")]
+    [SerializeField] private BudgetManager budgetManager;
+    [SerializeField] private TMP_Text waterPrice;
+    [SerializeField] private TMP_Text electricityPrice;
+    [SerializeField] private TMP_Text sewagePrice;
+
+    private bool UsesSprites => normalSprite != null && selectedSprite != null;
+
     private void OnEnable()
     {
         if (networkBuilder != null)
@@ -24,6 +38,7 @@ public class ToolSelectionUI : MonoBehaviour
 
     private void Start()
     {
+        UpdatePrices();
         UpdateSelection();
     }
 
@@ -33,49 +48,80 @@ public class ToolSelectionUI : MonoBehaviour
             networkBuilder.OnToolChanged -= UpdateSelection;
     }
 
-    private void UpdateSelection()
+    private void UpdatePrices()
     {
-        UpdateButtonState(waterButton, ToolMask.Water);
-        UpdateButtonState(electricityButton, ToolMask.Electricity);
-        UpdateButtonState(sewageButton, ToolMask.Sewage);
-        UpdateButtonState(eraserButton, ToolMask.Eraser);
-
-        if (!networkBuilder.HasToolSelected)
+        if (budgetManager == null)
             return;
 
-        if (networkBuilder.IsEraseMode)
-        {
-            eraserButton.color = selectedColor;
-            return;
-        }
-
-        switch (networkBuilder.SelectedNetwork)
-        {
-            case NetworkType.Water:
-                waterButton.color = selectedColor;
-                break;
-
-            case NetworkType.Electricity:
-                electricityButton.color = selectedColor;
-                break;
-
-            case NetworkType.Sewage:
-                sewageButton.color = selectedColor;
-                break;
-        }
+        SetPrice(waterPrice, NetworkType.Water);
+        SetPrice(electricityPrice, NetworkType.Electricity);
+        SetPrice(sewagePrice, NetworkType.Sewage);
     }
 
-    // Aplica a cor normal ou bloqueada e desativa o clique se bloqueado
-    private void UpdateButtonState(Image buttonImage, ToolMask tool)
+    private void SetPrice(TMP_Text label, NetworkType network)
+    {
+        if (label != null)
+            label.text = "R$ " + budgetManager.GetNetworkCost(network);
+    }
+
+    private void UpdateSelection()
+    {
+        bool hasTool = networkBuilder.HasToolSelected;
+        bool erase = networkBuilder.IsEraseMode;
+        NetworkType network = networkBuilder.SelectedNetwork;
+
+        UpdateButtonState(waterButton, ToolMask.Water,
+            hasTool && !erase && network == NetworkType.Water);
+
+        UpdateButtonState(electricityButton, ToolMask.Electricity,
+            hasTool && !erase && network == NetworkType.Electricity);
+
+        UpdateButtonState(sewageButton, ToolMask.Sewage,
+            hasTool && !erase && network == NetworkType.Sewage);
+
+        UpdateButtonState(eraserButton, ToolMask.Eraser,
+            hasTool && erase);
+    }
+
+    // Aplica o estado normal, selecionado ou bloqueado e desativa o clique se bloqueado
+    private void UpdateButtonState(Image buttonImage, ToolMask tool, bool selected)
     {
         bool allowed = networkBuilder.IsToolAllowed(tool);
-
-        buttonImage.color = allowed ? normalColor : lockedColor;
+        selected &= allowed;
 
         Button button = buttonImage.GetComponent<Button>();
 
         if (button != null)
             button.interactable = allowed;
+
+        if (UsesSprites)
+        {
+            buttonImage.sprite = selected ? selectedSprite : normalSprite;
+            buttonImage.color = allowed ? Color.white : lockedColor;
+
+            SetChildActive(buttonImage.transform, "Lock", !allowed);
+            SetChildActive(buttonImage.transform, "Key", allowed);
+
+            UIButtonFeel feel = buttonImage.GetComponent<UIButtonFeel>();
+
+            if (feel != null)
+                feel.SetHeld(selected);
+        }
+        else
+        {
+            buttonImage.color = !allowed ? lockedColor : selected ? selectedColor : normalColor;
+        }
+    }
+
+    private static void SetChildActive(Transform root, string name, bool active)
+    {
+        foreach (Transform child in root.GetComponentsInChildren<Transform>(true))
+        {
+            if (child.name == name)
+            {
+                child.gameObject.SetActive(active);
+                return;
+            }
+        }
     }
 }
-

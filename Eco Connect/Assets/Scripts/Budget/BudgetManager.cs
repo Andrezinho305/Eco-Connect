@@ -29,6 +29,14 @@ public class BudgetManager : MonoBehaviour
 
     public event Action<int> OnBudgetChanged;
 
+    // Disparado quando o jogador tenta construir sem dinheiro
+    public event Action OnInsufficientFunds;
+
+    public void ReportInsufficientFunds()
+    {
+        OnInsufficientFunds?.Invoke();
+    }
+
     private void Awake()
     {
         if (levelData != null)
